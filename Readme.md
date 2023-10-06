@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Анастасия Иванова](https://up.htmlacademy.ru/javascript/30/user/2349695).
-* Наставник: `Arthur Litovko`.
+* Наставник: [Arthur Litovko](https://htmlacademy.ru/profile/id6927).
 
 ---
 
