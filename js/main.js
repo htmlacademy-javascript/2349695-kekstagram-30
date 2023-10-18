@@ -68,23 +68,20 @@ const createComment = () => {
   };
 };
 
-const randomCommentsQuantity = getRandomInteger(0, 30);
-const similarComments = Array.from({ length: randomCommentsQuantity }, createComment);
+const similarComments = Array.from({ length: getRandomInteger(0, 30) }, createComment);
 
 const createPhotoDescription = () => {
   const randomIdIndex = createRandomId(1, 25);
   const randomUrlIndex = createRandomId(1, 25);
-  const randomDescriptionIndex = getRandomInteger(0, DESCRIPTION.length - 1);
   const randomLikesIndex = getRandomInteger(15, 200);
 
   return {
     id: randomIdIndex(),
     url: `photos/${randomUrlIndex()}.jpg`,
-    description: DESCRIPTION[randomDescriptionIndex].toString(),
+    description: getRandomArrayElement(DESCRIPTION),
     likes: randomLikesIndex,
     comments: similarComments,
   };
 };
 
 const similarPhotoDescriptions = Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT }, createPhotoDescription);
-console.log(similarPhotoDescriptions);
