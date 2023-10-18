@@ -35,7 +35,7 @@ const getRandomInteger = (min, max) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createRandomIdFromRangeGenerator = (min, max) => {
+const createRandomId = (min, max) => {
   const previousValues = [];
   return function () {
     let currentValue = getRandomInteger(min, max);
@@ -57,7 +57,7 @@ const createMessage = () =>
 
 
 const createComment = () => {
-  const randomIdComment = createRandomIdFromRangeGenerator(0, Infinity);
+  const randomIdComment = createRandomId(0, 25);
   const randomAvatarComment = getRandomInteger(1, 6);
 
   return {
@@ -72,8 +72,8 @@ const randomCommentsQuantity = getRandomInteger(0, 30);
 const similarComments = Array.from({ length: randomCommentsQuantity }, createComment);
 
 const createPhotoDescription = () => {
-  const randomIdIndex = createRandomIdFromRangeGenerator(1, 25);
-  const randomUrlIndex = createRandomIdFromRangeGenerator(1, 25);
+  const randomIdIndex = createRandomId(1, 25);
+  const randomUrlIndex = createRandomId(1, 25);
   const randomDescriptionIndex = getRandomInteger(0, DESCRIPTION.length - 1);
   const randomLikesIndex = getRandomInteger(15, 200);
 
