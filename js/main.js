@@ -33,6 +33,8 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
 const createRandomIdFromRangeGenerator = (min, max) => {
   const previousValues = [];
   return function () {
@@ -48,18 +50,21 @@ const createRandomIdFromRangeGenerator = (min, max) => {
   };
 };
 
+const createMessage = () =>
+  Array.from ({ length: getRandomInteger(1, 2) },
+    () => getRandomArrayElement(MESSAGE),
+  ).join(' ');
+
 
 const createComment = () => {
   const randomIdComment = createRandomIdFromRangeGenerator(0, Infinity);
   const randomAvatarComment = getRandomInteger(1, 6);
-  const randomMessageComment = getRandomInteger(0, MESSAGE.length - 1);
-  const randomNameComment = getRandomInteger(0, NAME.length - 1);
 
   return {
     id: randomIdComment(),
-    avatar: 'img/avatar-' + randomAvatarComment + '.svg',
-    message: MESSAGE[randomMessageComment],
-    name: NAME[randomNameComment],
+    avatar: `img/avatar-${randomAvatarComment}.svg`,
+    message: createMessage(),
+    name: getRandomArrayElement(NAME),
   };
 };
 
@@ -74,7 +79,7 @@ const createPhotoDescription = () => {
 
   return {
     id: randomIdIndex(),
-    url: 'photos/' + randomUrlIndex() + '.jpg',
+    url: `photos/${randomUrlIndex()}.jpg`,
     description: DESCRIPTION[randomDescriptionIndex].toString(),
     likes: randomLikesIndex,
     comments: similarComments,
