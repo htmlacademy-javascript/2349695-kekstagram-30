@@ -35,13 +35,13 @@ const getRandomInteger = (min, max) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createRandomId = (min, max) => {
+const createRandomIdGenerator = (min, max) => {
   const previousValues = [];
-  return function () {
-    let currentValue = getRandomInteger(min, max);
+  return () => {
     if (previousValues.length >= (max - min + 1)) {
       return null;
     }
+    let currentValue = getRandomInteger(min, max);
     while (previousValues.includes(currentValue)) {
       currentValue = getRandomInteger(min, max);
     }
@@ -55,33 +55,31 @@ const createMessage = () =>
     () => getRandomArrayElement(MESSAGE),
   ).join(' ');
 
-
+const generateCommentId = createRandomIdGenerator(1, 1000);
 const createComment = () => {
-  const randomIdComment = createRandomId(0, 25);
   const randomAvatarComment = getRandomInteger(1, 6);
 
   return {
-    id: randomIdComment(),
+    id: generateCommentId(),
     avatar: `img/avatar-${randomAvatarComment}.svg`,
     message: createMessage(),
     name: getRandomArrayElement(NAME),
   };
 };
 
-const similarComments = Array.from({ length: getRandomInteger(0, 30) }, createComment);
+const randomIdIndex = createRandomIdGenerator(1, 25);
+const randomUrlIndex = createRandomIdGenerator(1, 25);
 
 const createPhotoDescription = () => {
-  const randomIdIndex = createRandomId(1, 25);
-  const randomUrlIndex = createRandomId(1, 25);
   const randomLikesIndex = getRandomInteger(15, 200);
-
   return {
     id: randomIdIndex(),
     url: `photos/${randomUrlIndex()}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: randomLikesIndex,
-    comments: similarComments,
+    comments: Array.from({ length: getRandomInteger(0, 30) }, createComment),
   };
 };
 
 const similarPhotoDescriptions = Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT }, createPhotoDescription);
+
