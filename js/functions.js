@@ -35,3 +35,4 @@ const returnNumber = function (inputData) {
 };
 
 returnNumber('1 кефир, 0.5 батона');
+
