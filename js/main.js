@@ -1,5 +1,5 @@
 import './util.js';
-import {similarPhotoDescriptions} from './data.js';
+import {similarPhotoDescriptions} from './mockes.js';
 
 
 console.log(similarPhotoDescriptions());

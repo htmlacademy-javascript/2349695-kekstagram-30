@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomInteger} from './util.js';
+import {getRandomArrayElement, getRandomInteger, createRandomId} from './util.js';
 
 const DESCRIPTION = [
   'Моё фото',
@@ -28,21 +28,6 @@ const NAME = [
 
 const SIMILAR_PHOTO_DESCRIPTION_COUNT = 25;
 
-const createRandomId = (min, max) => {
-  const previousValues = [];
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
-
 const createMessage = () =>
   Array.from ({ length: getRandomInteger(1, 2) },
     () => getRandomArrayElement(MESSAGE),
@@ -61,11 +46,10 @@ const createComment = () => {
   };
 };
 
-const similarComments = Array.from({ length: getRandomInteger(0, 30) }, createComment);
+const randomIdIndex = createRandomId(1, 25);
+const randomUrlIndex = createRandomId(1, 25);
 
 const createPhotoDescription = () => {
-  const randomIdIndex = createRandomId(1, 25);
-  const randomUrlIndex = createRandomId(1, 25);
   const randomLikesIndex = getRandomInteger(15, 200);
 
   return {
@@ -73,7 +57,7 @@ const createPhotoDescription = () => {
     url: `photos/${randomUrlIndex()}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: randomLikesIndex,
-    comments: similarComments,
+    comments: Array.from({ length: getRandomInteger(0, 30) }, createComment),
   };
 };
 

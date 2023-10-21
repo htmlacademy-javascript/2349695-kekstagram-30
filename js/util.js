@@ -7,4 +7,19 @@ const getRandomInteger = (min, max) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomArrayElement, getRandomInteger};
+const createRandomId = (min, max) => {
+  const previousValues = [];
+  return function () {
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    let currentValue = getRandomInteger(min, max);
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+};
+
+export {getRandomArrayElement, getRandomInteger, createRandomId};
