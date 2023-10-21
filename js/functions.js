@@ -9,7 +9,7 @@ checkLength('проверяемая строка', 10);
 //Функция для проверки, является ли строка палиндромом
 
 const checkPalindrome = function (string) {
-  const normalizeLine = string.toLowerCase().replaceAll(/\s/g,'');
+  const normalizeLine = string.toLowerCase().replaceAll(/\s/g, '');
   let emptyLine = '';
   for (let i = normalizeLine.length - 1; i >= 0; i--) {
     emptyLine += normalizeLine.at(i);

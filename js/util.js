@@ -22,4 +22,4 @@ const createRandomId = (min, max) => {
   };
 };
 
-export {getRandomArrayElement, getRandomInteger, createRandomId};
+export { getRandomArrayElement, getRandomInteger, createRandomId };
