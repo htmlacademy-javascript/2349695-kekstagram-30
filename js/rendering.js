@@ -1,6 +1,6 @@
 import { similarPhotoDescriptions } from './mockes.js';
 
-const picturesPlace = document.querySelector('.picture');
+const picturesPlace = document.querySelector('.pictures');
 const similarPicturesTemplate = document.querySelector('#picture').content;
 const similarPhotos = similarPhotoDescriptions();
 const similarPhotosFragment = document.createDocumentFragment();
