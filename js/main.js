@@ -1,5 +1,4 @@
-import './util.js';
-import { similarPhotoDescriptions } from './mockes.js';
-import './rendering.js';
+import {similarPhotoDescriptions} from './mockes.js';
+import {renderPictureElements} from './rendering.js';
 
-console.log(similarPhotoDescriptions());
+renderPictureElements(similarPhotoDescriptions());

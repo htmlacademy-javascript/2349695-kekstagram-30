@@ -47,10 +47,10 @@ const createComment = () => {
   };
 };
 
-const randomIdIndex = createRandomId(1, 25);
-const randomUrlIndex = createRandomId(1, 25);
 
 const createPhotoDescription = () => {
+  const randomIdIndex = createRandomId(1, 25);
+  const randomUrlIndex = createRandomId(1, 25);
   const randomLikesIndex = getRandomInteger(15, 200);
   return {
     id: randomIdIndex(),
