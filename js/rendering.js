@@ -1,5 +1,4 @@
-const picturesPlace = document.querySelector('.pictures');
-const similarPicturesTemplate = document.querySelector('#picture').content;
+const similarPicturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const similarPhotosFragment = document.createDocumentFragment();
 
 const createPictureElement = ({ url, description, likes, comments, id }) => {
@@ -14,12 +13,12 @@ const createPictureElement = ({ url, description, likes, comments, id }) => {
   return pictureElement;
 };
 
-const renderPictureElements = (pictures) => {
+const renderPictureElements = (pictures, container) => {
   pictures.forEach((picture) => {
     const pictureElement = createPictureElement(picture);
     similarPhotosFragment.append(pictureElement);
   });
-  picturesPlace.append(similarPhotosFragment);
+  container.append(similarPhotosFragment);
 };
 
 export { renderPictureElements };
