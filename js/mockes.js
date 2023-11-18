@@ -1,6 +1,6 @@
 import { getRandomArrayElement, getRandomInteger, createRandomId } from './util.js';
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Моё фото',
   'Наслаждаюсь фотографией',
   'Красота!',
@@ -10,7 +10,7 @@ const DESCRIPTION = [
   'Photo by me',
 ];
 
-const MESSAGE = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -19,7 +19,7 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const NAME = [
+const NAMES = [
   'Тинки-Винки',
   'Дипси',
   'Ляля',
@@ -31,7 +31,7 @@ const COMMENT_COUNT = 30;
 
 const createMessage = () =>
   Array.from({ length: getRandomInteger(1, 2) },
-    () => getRandomArrayElement(MESSAGE),
+    () => getRandomArrayElement(MESSAGES),
   ).join(' ');
 
 
@@ -43,24 +43,22 @@ const createComment = () => {
     id: randomIdComment(),
     avatar: `img/avatar-${randomAvatarComment}.svg`,
     message: createMessage(),
-    name: getRandomArrayElement(NAME),
+    name: getRandomArrayElement(NAMES),
   };
 };
 
-const randomIdIndex = createRandomId(1, 25);
-const randomUrlIndex = createRandomId(1, 25);
 
-const createPhotoDescription = () => {
-  const randomLikesIndex = getRandomInteger(15, 200);
-  return {
-    id: randomIdIndex(),
-    url: `photos/${randomUrlIndex()}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: randomLikesIndex,
-    comments: Array.from({ length: getRandomInteger(0, COMMENT_COUNT) }, createComment),
-  };
-};
+const createPhoto = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONS),
+  likes: getRandomInteger(15, 200),
+  comments: Array.from({ length: getRandomInteger(0, COMMENT_COUNT) }, createComment,)
+});
 
-const similarPhotoDescriptions = () => Array.from({ length: PHOTO_COUNT }, createPhotoDescription);
+const similarPhotoDescriptions = () => Array.from(
+  { length: PHOTO_COUNT },
+  (_, pictureIndex) => createPhoto(pictureIndex + 1)
+);
 
 export { similarPhotoDescriptions };
