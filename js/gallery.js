@@ -7,7 +7,7 @@ const renderGallery = (pictures) => {
   picturesPlace.addEventListener('click', (evt) => {
     const pictureElement = evt.target.closest('[data-picture-id]');
 
-    if (! pictureElement) {
+    if (!pictureElement) {
       return;
     }
 
