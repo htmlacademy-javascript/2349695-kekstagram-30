@@ -5,3 +5,6 @@ import './form.js';
 
 renderGallery(similarPhotoDescriptions());
 
+
+//тук тук
+
