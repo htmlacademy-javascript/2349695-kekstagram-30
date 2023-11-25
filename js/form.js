@@ -4,6 +4,8 @@ import {
   init as initEffect,
   reset as resetEffect
 } from './effect.js';
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -11,6 +13,10 @@ const ErrorText = {
   INVALID_COUNT: `Разрешено максимум ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
   INVALID_PATTERN: 'Введён неправильный хэштег',
+};
+const SubmitButtonCaption = {
+  SUBMITTING: 'Отправляю...',
+  IDLE: 'Опубликовать',
 };
 
 const body = document.querySelector('body');
@@ -20,6 +26,16 @@ const cancelButton = form.querySelector('.img-upload__cancel');
 const fileField = form.querySelector('.img-upload__input');
 const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit');
+
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  if (isDisabled) {
+    submitButton.textContent = SubmitButtonCaption.SUBMITTING;
+  } else {
+    submitButton.textContent = SubmitButtonCaption.IDLE;
+  }
+};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -62,7 +78,8 @@ const hasUniqueTags = (value) => {
 const hasValidCount = (value) => normalizeTags(value).length <= MAX_HASHTAG_COUNT;
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey && !isTextFieldFocused()) {
+  const isErrorMessageExists = Boolean(document.querySelector('.error'));
+  if (isEscapeKey && !isTextFieldFocused() && !isErrorMessageExists) {
     evt.preventDefault();
     closeForm();
   }
@@ -76,9 +93,26 @@ const onCancelButtonClick = () => {
   closeForm();
 };
 
+const sendForm = async (formElement) => {
+  if (!pristine.validate()) {
+    return;
+  }
+
+  try {
+    toggleSubmitButton(true);
+    await sendData(new FormData(formElement));
+    toggleSubmitButton(false);
+    closeForm();
+    showSuccessMessage();
+  } catch {
+    showErrorMessage();
+    toggleSubmitButton(false);
+  }
+};
+
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  sendForm(evt.target);
 };
 
 pristine.addValidator(
