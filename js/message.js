@@ -1,3 +1,5 @@
+import { isEscapeKey } from './util.js';
+
 const successMessageElement = document.querySelector('#success').content.querySelector('.success');
 const errorMessageElement = document.querySelector('#error').content.querySelector('.error');
 
@@ -11,7 +13,7 @@ const onCloseButtonClick = () => {
 };
 
 const onDocumentKeydown = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey) {
     evt.preventDefault();
     hideMessage();
   }
