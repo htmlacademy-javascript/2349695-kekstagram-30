@@ -4,7 +4,7 @@ import {
   init as initEffect,
   reset as resetEffect
 } from './effect.js';
-import { sendData } from './api.js';
+import { sendPictures } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
@@ -87,7 +87,7 @@ const hasValidCount = (value) => normalizeTags(value).length <= MAX_HASHTAG_COUN
 
 function onDocumentKeydown(evt) {
   const isErrorMessageExists = Boolean(document.querySelector('.error'));
-  if (isEscapeKey && !isTextFieldFocused() && !isErrorMessageExists) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !isErrorMessageExists) {
     evt.preventDefault();
     closeForm();
   }
@@ -116,7 +116,7 @@ const sendForm = async (formElement) => {
 
   try {
     toggleSubmitButton(true);
-    await sendData(new FormData(formElement));
+    await sendPictures(new FormData(formElement));
     toggleSubmitButton(false);
     closeForm();
     showSuccessMessage();

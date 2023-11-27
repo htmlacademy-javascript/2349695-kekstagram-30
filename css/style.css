@@ -136,7 +136,7 @@ main {
   opacity: 0;
 }
 
-.img-filters__button {
+. {
   padding: 5px 15px;
 
   font-family: "Open Sans", "Arial", sans-serif;

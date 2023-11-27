@@ -21,7 +21,6 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { showErrorMessage, isEscapeKey, debounce, getRandomIndex };
+export {showErrorMessage, isEscapeKey, debounce, getRandomIndex };
