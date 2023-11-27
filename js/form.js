@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util';
-import {resetScale} from './scale.js';
+import { resetScale } from './scale.js';
 import {
   init as initEffect,
   reset as resetEffect
