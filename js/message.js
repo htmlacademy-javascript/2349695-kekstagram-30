@@ -6,26 +6,28 @@ const errorMessageElement = document.querySelector('#error').content.querySelect
 const hideMessage = () => {
   const existsElement = document.querySelector('.success') || document.querySelector('.error');
   existsElement.remove();
+  document.removeEventListener('keydown', onDocumentKeydown);
+  document.body.removeEventListener('click', onBodyClick);
 };
 
 const onCloseButtonClick = () => {
   hideMessage();
 };
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   if (isEscapeKey) {
     evt.preventDefault();
     hideMessage();
   }
-};
+}
 
-const onBodyClick = (evt) => {
-  if (evt.target.closest('.success__inner') || (evt.target.closest('.error__inner'))) {
+function onBodyClick(evt) {
+  if (evt.target.closest('.success__inner') || evt.target.closest('.error__inner')) {
     return;
   }
 
   hideMessage();
-};
+}
 
 const showMessage = (element, buttonClass) => {
   document.body.append(element);
