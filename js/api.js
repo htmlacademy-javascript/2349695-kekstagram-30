@@ -27,8 +27,8 @@ const request = (route, errorText, method = httpMethod.GET, body = null) =>
       throw new Error(errorText);
     });
 
-const getData = () => request(serverRoute.GET_DATA, ErrorText.GET_DATA);
+const getPictures = () => request(serverRoute.GET_DATA, ErrorText.GET_DATA);
 
-const sendData = (body) => request(serverRoute.SEND_DATA, ErrorText.SEND_DATA, httpMethod.POST, body);
+const sendPictures = (body) => request(serverRoute.SEND_DATA, ErrorText.SEND_DATA, httpMethod.POST, body);
 
-export {getData, sendData};
+export { getPictures, sendPictures };
