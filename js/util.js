@@ -1,27 +1,17 @@
-const getRandomInteger = (min, max) => {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
+const REMOVE_MESSAGE_TIMEOUT = 5000;
+
+const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+
+const showErrorMessage = () => {
+  const errorElement = errorMessageTemplate.cloneNode(true);
+  document.body.append(errorElement);
+
+  setTimeout(() => {
+    errorElement.remove();
+  }, REMOVE_MESSAGE_TIMEOUT);
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
-const createRandomId = (min, max) => {
-  const previousValues = [];
-  return function () {
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    let currentValue = getRandomInteger(min, max);
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getRandomArrayElement, getRandomInteger, createRandomId, isEscapeKey };
+export {showErrorMessage, isEscapeKey};
