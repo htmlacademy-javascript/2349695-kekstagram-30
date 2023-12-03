@@ -18,8 +18,10 @@ let comments = [];
 const createComment = ({ avatar, message, name }) => {
   const newComment = commentTemplate.cloneNode(true);
 
-  newComment.querySelector('.social__picture').src = avatar;
-  newComment.querySelector('.social__picture').alt = name;
+  const image = newComment.querySelector('.social__picture');
+  image.src = avatar;
+  image.alt = name;
+
   newComment.querySelector('.social__text').textContent = message;
 
   return newComment;
@@ -70,8 +72,10 @@ function onDocumentKeydown(evt) {
 }
 
 const renderPicture = ({ url, description, likes }) => {
-  bigPictureElement.querySelector('.big-picture__img img').src = url;
-  bigPictureElement.querySelector('.big-picture__img img').alt = description;
+  const image = bigPictureElement.querySelector('.big-picture__img img');
+  image.src = url;
+  image.alt = description;
+
   bigPictureElement.querySelector('.likes-count').textContent = likes;
   bigPictureElement.querySelector('.social__caption').textContent = description;
 
