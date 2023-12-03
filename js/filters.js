@@ -1,4 +1,3 @@
-import { renderGallery } from './gallery.js';
 import { renderPictureElements } from './rendering.js';
 import { getRandomIndex, debounce } from './util.js';
 
