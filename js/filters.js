@@ -1,4 +1,5 @@
 import { renderGallery } from './gallery.js';
+import { renderPictureElements } from './rendering.js';
 import { getRandomIndex, debounce } from './util.js';
 
 const MAX_RANDOM_FILTER = 10;
@@ -49,7 +50,7 @@ const clearContainer = () => {
 const repaint = (filter, pictures) => {
   const filteredPictures = FilterHandlers[filter](pictures);
   clearContainer();
-  renderGallery(filteredPictures);
+  renderPictureElements(filteredPictures);
 };
 
 const debouncedRepaint = debounce(repaint, REPAINT_DELAY);
